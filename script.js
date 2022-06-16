@@ -10,6 +10,8 @@ const PARROTS = [
   "unicornparrot.gif",
 ];
 let selectedCards = null;
+let numClicks = null;
+let numPairs = null;
 
 function getCardNumber() {
   cardNumber = Number(prompt("Com quantas cartas você quer jogar?"));
@@ -67,17 +69,16 @@ function canFlip(card) {
 
 function flip(card, cardName) {
   if (canFlip(card)) {
+    numClicks++;
     card.classList.add("clicked");
     selectedCards.push([cardName, card]);
     if (selectedCards.length === 2) {
       flipOff();
     }
-    
   }
 }
 
 function verifyCards() {
-  
   return selectedCards[0][0] === selectedCards[1][0];
 }
 
@@ -86,6 +87,10 @@ function flipOff() {
     selectedCards[0][1].classList.add("paired");
     selectedCards[1][1].classList.add("paired");
     selectedCards = [];
+    numPairs++
+    if (numPairs === cardNumber / 2) {
+        setTimeout(gameOver, 250);
+    }
   } else {
     setTimeout(flipBack, 1000);
   }
@@ -97,10 +102,20 @@ function flipBack() {
   selectedCards = [];
 }
 
+function gameOver() {
+    alert (`Você ganhou em ${numClicks} rodadas!`)
+    const newGame = prompt ("Você quer jogar de novo?")
+    if (newGame === "sim") {
+    game();
+    }
+}
+
 function game() {
   getCardNumber();
   getDeck();
   renderHtml();
   selectedCards = [];
+  numClicks = 0;
+  numPairs = 0;
 }
 game();
