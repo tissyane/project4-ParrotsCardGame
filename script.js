@@ -1,14 +1,15 @@
 let cardNumber = null;
 let deck = null;
 const PARROTS = [
-    "revertitparrot.gif",
-    "bobrossparrot.gif",
-    "tripletsparrot.gif",
-    "fiestaparrot.gif",
-    "metalparrot.gif",
-    "explodyparrot.gif",
-    "unicornparrot.gif",
-  ];
+  "revertitparrot.gif",
+  "bobrossparrot.gif",
+  "tripletsparrot.gif",
+  "fiestaparrot.gif",
+  "metalparrot.gif",
+  "explodyparrot.gif",
+  "unicornparrot.gif",
+];
+let selectedCards = null;
 
 function getCardNumber() {
   cardNumber = Number(prompt("Com quantas cartas você quer jogar?"));
@@ -33,7 +34,7 @@ function renderHtml() {
   let str = "";
   for (let i = 0; i < cardNumber; i++) {
     str += `
-        <div class="card">
+        <div class="card" onclick="flip(this, '${deck[i]}')">
             <div class="front-face face">
                 <img src="imagens/front.png" alt="papagaio" />
             </div>
@@ -41,25 +42,65 @@ function renderHtml() {
                 <img src="imagens/${deck[i]}" alt="" />
             </div>
         </div>`;
-  } 
-  const elemento = document.querySelector(".container_cards")
+  }
+  const elemento = document.querySelector(".container_cards");
   elemento.innerHTML = str;
 }
 
 function getDeck() {
-    deck = [];
-    for (let i = 0; i < deck.length; i++) {
-        const element = PARROTS[i];
+  deck = [];
+  for (let i = 0; i < cardNumber / 2; i++) {
+    const element = PARROTS[i];
     deck.push(element);
     deck.push(element);
+  }
+  deck.sort(comparador);
+}
+
+function comparador() {
+  return Math.random() - 0.5;
+}
+
+function canFlip(card) {
+  return selectedCards.length < 2 && !card.classList.contains("paired");
+}
+
+function flip(card, cardName) {
+  if (canFlip(card)) {
+    card.classList.add("clicked");
+    selectedCards.push([cardName, card]);
+    if (selectedCards.length === 2) {
+      flipOff();
     }
-    deck.sort(comparador);
+    
+  }
 }
 
-function comparador() { 
-	return Math.random() - 0.5; 
+function verifyCards() {
+  
+  return selectedCards[0][0] === selectedCards[1][0];
 }
 
-getCardNumber();
-getDeck();
-renderHtml();
+function flipOff() {
+  if (verifyCards()) {
+    selectedCards[0][1].classList.add("paired");
+    selectedCards[1][1].classList.add("paired");
+    selectedCards = [];
+  } else {
+    setTimeout(flipBack, 1000);
+  }
+}
+
+function flipBack() {
+  selectedCards[0][1].classList.remove("clicked");
+  selectedCards[1][1].classList.remove("clicked");
+  selectedCards = [];
+}
+
+function game() {
+  getCardNumber();
+  getDeck();
+  renderHtml();
+  selectedCards = [];
+}
+game();
