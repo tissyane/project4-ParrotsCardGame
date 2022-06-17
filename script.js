@@ -16,6 +16,7 @@ let numPairs = null;
 function getCardNumber() {
   cardNumber = Number(prompt("Com quantas cartas você quer jogar?"));
   if (isInvalid(cardNumber)) {
+    alert("O número de cartas deve ser um número par entre 4 e 14.")
     return getCardNumber();
   }
 }

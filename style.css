@@ -8,7 +8,7 @@ body {
 
 .header {
     margin-top: 40px;   
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-align: center;
     
 }
@@ -18,14 +18,15 @@ h1 {
     font-weight: 700;
     line-height: 65.63px;
     color: #75B79E; 
-    text-align: center; 
+     
 }
 
 p {
-    margin-right: 50px;
+    margin: 0 50px 30px 0;
     text-align: end;
     color: #EA596E;
     font-size: 30px;
+    
 }
 
 .container_cards {
