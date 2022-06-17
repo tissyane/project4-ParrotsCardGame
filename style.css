@@ -8,24 +8,24 @@ body {
 
 .header {
     margin-top: 40px;   
-    margin-bottom: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+    margin-bottom: 20px;
+    text-align: center;
+    
 }
 
 h1 {
     font-size: 56px;
     font-weight: 700;
-    color: #75B79E;
-    
-
+    line-height: 65.63px;
+    color: #75B79E; 
+    text-align: center; 
 }
 
 p {
-    margin-left: 150px;
     margin-right: 50px;
+    text-align: end;
+    color: #EA596E;
+    font-size: 30px;
 }
 
 .container_cards {
@@ -36,6 +36,7 @@ p {
     flex-wrap: wrap;
     justify-content: center;
     gap: 34px;  
+    margin-bottom: 40px
 }
 
 img {

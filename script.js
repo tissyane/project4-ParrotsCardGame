@@ -102,11 +102,18 @@ function flipBack() {
   selectedCards = [];
 }
 
-function gameOver() {
-    alert (`Você ganhou em ${numClicks} rodadas!`)
-    const newGame = prompt ("Você quer jogar de novo?")
+function gameOver(showalert=true) {
+  if (showalert) {
+    alert (`Parabéns! Você ganhou em ${numClicks} jogadas!`)}
+    
+    let newGame = prompt ('Você quer jogar de novo? \nDigite "sim" para iniciar um novo jogo ou "não" para sair.')
     if (newGame === "sim") {
     game();
+    } else if (newGame === "não") {
+      alert("Agradecemos por jogar Parrot Card Game! Até a próxima :)")
+    } else {
+      gameOver(false)
+      
     }
 }
 
