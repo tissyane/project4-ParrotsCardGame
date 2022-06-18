@@ -12,11 +12,13 @@ const PARROTS = [
 let selectedCards = null;
 let numClicks = null;
 let numPairs = null;
+let contador = 0;
+let idInterval = 0;
 
 function getCardNumber() {
   cardNumber = Number(prompt("Com quantas cartas você quer jogar?"));
   if (isInvalid(cardNumber)) {
-    alert("O número de cartas deve ser um número par entre 4 e 14.")
+    alert("O número de cartas deve ser um número par entre 4 e 14.");
     return getCardNumber();
   }
 }
@@ -88,9 +90,9 @@ function flipOff() {
     selectedCards[0][1].classList.add("paired");
     selectedCards[1][1].classList.add("paired");
     selectedCards = [];
-    numPairs++
+    numPairs++;
     if (numPairs === cardNumber / 2) {
-        setTimeout(gameOver, 250);
+      setTimeout(gameOver, 250);
     }
   } else {
     setTimeout(flipBack, 1000);
@@ -103,20 +105,35 @@ function flipBack() {
   selectedCards = [];
 }
 
-function gameOver(showalert=true) {
+function gameOver(showalert = true) {
   if (showalert) {
-    alert (`Parabéns! Você ganhou em ${numClicks} jogadas!`)}
-    
-    let newGame = prompt ('Você quer jogar de novo? \nDigite "sim" para iniciar um novo jogo ou "não" para sair.')
-    if (newGame === "sim") {
+    alert(
+      `Parabéns! Você ganhou em ${numClicks} jogadas, em ${contador} segundos!`
+    );
+  }
+
+  let newGame = prompt(
+    'Você quer jogar de novo? \nDigite "sim" para iniciar um novo jogo ou "não" para sair.'
+  );
+  if (newGame === "sim") {
     game();
-    } else if (newGame === "não") {
-      alert("Agradecemos por jogar Parrot Card Game! Até a próxima :)")
-    } else {
-      gameOver(false)
-      
-    }
+  } else if (newGame === "não") {
+    alert("Agradecemos por jogar Parrot Card Game! Até a próxima :)");
+  } else {
+    gameOver(false);
+  }
 }
+
+function timer() {
+  document.querySelector(".timer").innerHTML = `${contador} s`;
+  return setInterval(increaseTimer, 1000);
+}
+
+function increaseTimer() {
+  
+  document.querySelector(".timer").innerHTML = `${++contador} s`;
+}
+
 
 function game() {
   getCardNumber();
@@ -125,5 +142,7 @@ function game() {
   selectedCards = [];
   numClicks = 0;
   numPairs = 0;
+  contador = 0;
+  idInterval = timer();
 }
 game();
