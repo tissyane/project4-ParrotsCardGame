@@ -93,6 +93,7 @@ function flipOff() {
     numPairs++;
     if (numPairs === cardNumber / 2) {
       setTimeout(gameOver, 250);
+      clearInterval(idInterval);
     }
   } else {
     setTimeout(flipBack, 1000);
