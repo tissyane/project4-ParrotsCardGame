@@ -67,7 +67,7 @@ function comparador() {
 }
 
 function canFlip(card) {
-  return selectedCards.length < 2 && !card.classList.contains("paired");
+  return selectedCards.length < 2 && !card.classList.contains("paired") && !card.classList.contains("clicked");
 }
 
 function flip(card, cardName) {
@@ -84,6 +84,8 @@ function flip(card, cardName) {
 function verifyCards() {
   return selectedCards[0][0] === selectedCards[1][0];
 }
+
+
 
 function flipOff() {
   if (verifyCards()) {
@@ -105,6 +107,8 @@ function flipBack() {
   selectedCards[1][1].classList.remove("clicked");
   selectedCards = [];
 }
+
+
 
 function gameOver(showalert = true) {
   if (showalert) {
